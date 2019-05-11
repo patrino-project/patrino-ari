@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, StatusBar, Alert} from 'react-native';
+import {Platform, StyleSheet, Text, View, StatusBar, Alert, Image} from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -47,7 +47,7 @@ class Home extends Component<{}> {
 
   render() {
 
-    if(logging == "false") {
+    if(logging == "true") {
       return (
         <View style={styles.container}>
           <StatusBar barStyle="light-content" backgroundColor="white" />
@@ -57,7 +57,7 @@ class Home extends Component<{}> {
     } else {
       return (
         <View style={styles.container}>
-          <StatusBar barStyle="light-content" backgroundColor="#D95D39" />
+          <StatusBar barStyle="light-content" backgroundColor="white" />
           <HomeScreen navigation={this.props.navigation} />
         </View>
       );
@@ -103,5 +103,6 @@ export default createAppContainer(App);
 const styles = StyleSheet.create({
   container: {
     flex: 1
-  }
+  },
+
 });
