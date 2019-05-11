@@ -1,18 +1,21 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Text, Button, View, FlatList, Alert, TextInput, TouchableOpacity, Linking, ScrollView } from "react-native";
+import { AppRegistry, StyleSheet, Button, View, FlatList, Image, Alert, TextInput, TouchableOpacity, Linking, ScrollView } from "react-native";
 
-import {Header, Left, Body, Icon, Right, Title, Card, CardItem, Badge } from "native-base";
+import {Header, Left, Body, Icon, Text, Tabs, Tab, Right, Title, Card, CardItem, Badge } from "native-base";
 
 import AsyncStorage from '@react-native-community/async-storage';
 
 import { StackNavigator } from "react-navigation";
 
+import { BarChart, Grid } from 'react-native-svg-charts';
+
 import Question from "./Question";
+import BarChartE from "./BarChartExample";
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
     headerStyle: {
-      backgroundColor: "#D95D39",
+      backgroundColor: "white",
       elevation: null
     },
     header: null
@@ -34,9 +37,12 @@ export default class HomeScreen extends Component {
   render() {
     return (
       <ScrollView>
-        <Header style={styles.header}>
+        <Header hasTabs>
+          <Left>
+            <Image style={styles.logo} source={require("./heart.png")} />
+          </Left>
           <Body>
-            <Title>Quiz</Title>
+            <Title>Patrino</Title>
           </Body>
           <Right>
             <Button
@@ -48,25 +54,54 @@ export default class HomeScreen extends Component {
           </Right>
         </Header>
 
-      <View style={styles.container}>
-        <Button
-          style={styles.buttonText}
-          onPress={() => {
-            this.props.navigation.navigate("QRCodeReader");
-          }}
-          title="Ler QR Code"
-          >
-        </Button>
+        <Tabs>
+          <Tab heading="Dashboard">
+            <View>
+              <Card>
+                <CardItem header>
+                  <Text>Amostras analisadas</Text>
+                </CardItem>
+                <BarChartE />
+              </Card>
+            </View>
 
-        <Button
-          style={styles.buttonText}
-          onPress={() => {
-            this.props.navigation.navigate("Test");
-          }}
-          title="Ver Teste"
-          >
-        </Button>
-      </View>
+            <View>
+              <Card>
+                <CardItem header>
+                  <Text>Número de doadoras</Text>
+                </CardItem>
+                <BarChartE />
+              </Card>
+            </View>
+
+            <View>
+              <Card>
+                <CardItem header>
+                  <Text>Número de leite coletado</Text>
+                </CardItem>
+                <BarChartE />
+              </Card>
+            </View>
+          </Tab>
+          <Tab heading="Pedidos">
+            <View>
+              <Text>Pedidos</Text>
+            </View>
+          </Tab>
+          <Tab heading="QR Code">
+            <View>
+                <Button
+                  style={styles.buttonText}
+                  onPress={() => {
+                    this.props.navigation.navigate("QRCodeReader");
+                  }}
+                  title="Ler QR Code"
+                  >
+                </Button>
+            </View>
+          </Tab>
+        </Tabs>
+
       </ScrollView>
     );
   }
@@ -74,10 +109,7 @@ export default class HomeScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  header: {
-    backgroundColor: "#D95D39"
 
-  },
   container: {
     flex: 1,
     backgroundColor: "white"
@@ -89,8 +121,8 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   logo: {
-    width: 200,
-    height: 200
+    width: 30,
+    height: 30
   },
   subtext: {
     color: "black",
