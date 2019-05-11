@@ -11,6 +11,8 @@ import {
   View
 } from "react-native";
 
+import AsyncStorage from '@react-native-community/async-storage';
+
 import { StackNavigator } from "react-navigation";
 
 export default class Login extends Component {
@@ -25,14 +27,31 @@ export default class Login extends Component {
 
   static navigationOptions = {
     headerStyle: {
-      backgroundColor: "#D95D39",
+      backgroundColor: "white",
       elevation: null
     },
     header: null
   };
 
   async onLoginPress() {
+    const CorrectEmail = "eduardo";
+    const CorrectPassword = "@eduardo";
 
+    const { email, password } = this.state;
+
+    await AsyncStorage.setItem("email", email);
+    await AsyncStorage.setItem("password", password);
+
+    if (email == CorrectEmail && password == CorrectPassword) {
+      await AsyncStorage.setItem("logging", "true");
+
+      this.props.navigation.navigate("HomeScreen");
+
+    } else {
+      Alert.alert(
+         "E-mail ou senha estão incorretos!"
+      )
+    }
   }
 
   render() {
@@ -40,7 +59,7 @@ export default class Login extends Component {
       <View style={styles.container}>
         <View behavior="padding" style={styles.container}>
           <View style={styles.logoContainer}>
-            <Image style={styles.logo} source={require("heart.png")} />
+            <Image style={styles.logo} source={require("./heart.png")} />
             <Text style={styles.subtext}>Patrino</Text>
           </View>
           <KeyboardAvoidingView style={styles.keyboard}>

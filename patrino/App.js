@@ -1,13 +1,36 @@
-
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View, StatusBar, Alert} from 'react-native';
+
+import AsyncStorage from '@react-native-community/async-storage';
 
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
-import Login from "./src/components/Login";
-import HomeScreen from "./src/components/HomeScreen";
+import Login from "./app/components/Login";
+import HomeScreen from "./app/components/HomeScreen";
+import QRCodeReader from "./app/components/QRCodeReader";
+import Test from "./app/components/Test";
+
+
+const instructions = Platform.select({
+  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
+  android:
+    'Double tap R on your keyboard to reload,\n' +
+    'Shake or press menu button for dev menu',
+});
+
 
 class Home extends Component<{}> {
+
+  constructor() {
+    super();
+
+    logging = "false";
+  }
+
+  componentDidMount() {
+    logging: this.retrieveData();
+  }
+
   static navigationOptions = {
     headerStyle: {
       backgroundColor: "white",
@@ -16,13 +39,29 @@ class Home extends Component<{}> {
     header: null
   };
 
+  async retrieveData() {
+    const value = await AsyncStorage.getItem('logging');
+
+    return value
+  };
+
   render() {
-    return (
-      <View style={styles.container}>
-        <StatusBar barStyle="light-content" backgroundColor="#D95D39" />
-        <Login navigation={this.props.navigation} />
-      </View>
-    );
+
+    if(logging == "false") {
+      return (
+        <View style={styles.container}>
+          <StatusBar barStyle="light-content" backgroundColor="white" />
+          <Login navigation={this.props.navigation} />
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.container}>
+          <StatusBar barStyle="light-content" backgroundColor="#D95D39" />
+          <HomeScreen navigation={this.props.navigation} />
+        </View>
+      );
+    }
   }
 }
 
@@ -44,26 +83,25 @@ const App = createStackNavigator({
     navigationOptions: {
       title: "Login"
     }
-  }
+  },
+  QRCodeReader: {
+    screen: QRCodeReader,
+    navigationOptions: {
+      title: "Leitor de QR Code"
+    }
+  },
+  Test: {
+    screen: Test,
+    navigationOptions: {
+      title: "Teste"
+    }
+  },
 });
 
 export default createAppContainer(App);
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    flex: 1
+  }
 });
