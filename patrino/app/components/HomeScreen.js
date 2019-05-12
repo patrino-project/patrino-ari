@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { AppRegistry, StyleSheet, Button, View, FlatList, Image, Alert, TextInput, TouchableOpacity, Linking, ScrollView } from "react-native";
+import { AppRegistry, StyleSheet, View, FlatList, Image, Alert, TextInput, TouchableOpacity, Linking, ScrollView } from "react-native";
 
-import {Header, Left, Body, Icon, Text, Tabs, Tab, Right, Title, Card, CardItem, Badge } from "native-base";
+import {Form, Thumbnail, Container, Item, Input, Header, Left, Body, Icon, Button, Text, Tabs, Tab, Right, Title, Card, CardItem, Badge } from "native-base";
 
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -11,6 +11,9 @@ import { BarChart, Grid } from 'react-native-svg-charts';
 
 import Question from "./Question";
 import BarChartE from "./BarChartExample";
+import Helps from "./Helps";
+
+import myTheme from './Theme';
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
@@ -26,7 +29,8 @@ export default class HomeScreen extends Component {
   }
 
   async sair() {
-    await AsyncStorage.setItem("email", "eduardo@gmail.com");
+    await AsyncStorage.setItem("email", "");
+    await AsyncStorage.setItem("password", "");
     await AsyncStorage.setItem("logging", "false");
 
     this.props.navigation.navigate("Login");
@@ -36,7 +40,7 @@ export default class HomeScreen extends Component {
 
   render() {
     return (
-      <ScrollView>
+      <Container>
         <Header hasTabs>
           <Left>
             <Image style={styles.logo} source={require("./heart.png")} />
@@ -46,63 +50,64 @@ export default class HomeScreen extends Component {
           </Body>
           <Right>
             <Button
-              style={styles.buttonText}
+              transparent
               onPress={this.sair.bind(this)}
-              title="Sair"
-              >
+            >
+              <Icon type="MaterialIcons" name="exit-to-app" />
             </Button>
           </Right>
         </Header>
 
         <Tabs>
-          <Tab heading="Dashboard">
-            <View>
-              <Card>
-                <CardItem header>
-                  <Text>Amostras analisadas</Text>
-                </CardItem>
-                <BarChartE />
-              </Card>
-            </View>
+          <Tab heading="Início" theme={myTheme}>
+            <ScrollView>
+              <View>
+                <Card>
+                  <CardItem header>
+                    <Text>Amostras analisadas</Text>
+                  </CardItem>
+                  <BarChartE />
+                </Card>
+              </View>
 
-            <View>
-              <Card>
-                <CardItem header>
-                  <Text>Número de doadoras</Text>
-                </CardItem>
-                <BarChartE />
-              </Card>
-            </View>
+              <View>
+                <Card>
+                  <CardItem header>
+                    <Text>Número de doadoras</Text>
+                  </CardItem>
+                  <BarChartE />
+                </Card>
+              </View>
 
-            <View>
-              <Card>
-                <CardItem header>
-                  <Text>Número de leite coletado</Text>
-                </CardItem>
-                <BarChartE />
-              </Card>
-            </View>
+              <View>
+                <Card>
+                  <CardItem header>
+                    <Text>Número de leite coletado</Text>
+                  </CardItem>
+                  <BarChartE />
+                </Card>
+              </View>
+            </ScrollView>
           </Tab>
           <Tab heading="Pedidos">
-            <View>
-              <Text>Pedidos</Text>
-            </View>
+            <Helps />
           </Tab>
           <Tab heading="QR Code">
             <View>
-                <Button
-                  style={styles.buttonText}
-                  onPress={() => {
-                    this.props.navigation.navigate("QRCodeReader");
-                  }}
-                  title="Ler QR Code"
-                  >
-                </Button>
+              <Button block success
+                onPress={() => {
+                  this.props.navigation.navigate("QRCodeReader");
+                }}
+              >
+                <Icon type="MaterialCommunityIcons" name="qrcode-scan" />
+                <Text>Ler QR Code</Text>
+              </Button>
+
             </View>
           </Tab>
         </Tabs>
 
-      </ScrollView>
+      </Container>
     );
   }
 
