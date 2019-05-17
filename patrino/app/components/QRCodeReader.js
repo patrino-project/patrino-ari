@@ -2,14 +2,13 @@
 
 import React, { Component } from 'react';
 
-import {Header, Body, Title} from "native-base";
-
+import {Form, Thumbnail, Container, Item, Input, Header, Left, Body, Icon, Button, Text, Tabs, Tab, Right, Title, Card, CardItem, Badge } from "native-base";
 
 
 import {
   AppRegistry,
+  ScrollView,
   StyleSheet,
-  Text,
   TouchableOpacity,
   Linking,
   View
@@ -19,25 +18,51 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 
 export default class QRCodeReader extends Component {
   static navigationOptions = {
+    title: 'Voltar',
     headerStyle: {
-      backgroundColor: "#D95D39",
+      backgroundColor: "#1e88e5",
       elevation: null,
-      color: "white"
+      color: "#fff"
     },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+    header: null
   };
 
   onSuccess(e) {
-    Linking
+    /*Linking
       .openURL(e.data)
       .catch(err => console.error('Um erro aconteceu!', err));
+    */
+    this.props.navigation.navigate("Bottle");
   }
 
   render() {
     return (
-      <QRCodeScanner
-        onRead={this.onSuccess.bind(this)}
+      <ScrollView>
+        <Header hasTabs>
+          <Left>
+            <Button
+              transparent
+              onPress={() => {
+                this.props.navigation.navigate("HomeScreen");
+              }}
 
-      />
+            >
+              <Icon type="MaterialIcons" name="arrow-back" />
+            </Button>
+          </Left>
+          <Body>
+            <Title>Voltar</Title>
+          </Body>
+        </Header>
+        <QRCodeScanner
+          onRead={this.onSuccess.bind(this)}
+
+        />
+      </ScrollView>
     );
   }
 }

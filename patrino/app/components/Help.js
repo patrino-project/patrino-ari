@@ -10,10 +10,9 @@ export default class Help extends React.PureComponent {
         <Card>
           <CardItem>
             <Left>
-              <Thumbnail source={require("./heart.png")} />
               <Body>
-                <Text>Jane Doe</Text>
-                <Text note>Médica</Text>
+                <Text>Nome</Text>
+                <Text note>Silvana Santos Barbosa</Text>
               </Body>
             </Left>
           </CardItem>
@@ -27,7 +26,7 @@ export default class Help extends React.PureComponent {
             </Left>
 
             <Right>
-              <Text>11h ago</Text>
+              <Text>11h atrás</Text>
             </Right>
           </CardItem>
         </Card>

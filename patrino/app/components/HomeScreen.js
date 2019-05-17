@@ -12,6 +12,7 @@ import { BarChart, Grid } from 'react-native-svg-charts';
 import Question from "./Question";
 import BarChartE from "./BarChartExample";
 import Helps from "./Helps";
+import Doadoras from "./Doadoras";
 
 import myTheme from './Theme';
 
@@ -59,52 +60,152 @@ export default class HomeScreen extends Component {
         </Header>
 
         <Tabs>
-          <Tab heading="Início" theme={myTheme}>
-            <ScrollView>
-              <View>
-                <Card>
-                  <CardItem header>
-                    <Text>Amostras analisadas</Text>
-                  </CardItem>
-                  <BarChartE />
-                </Card>
-              </View>
-
-              <View>
-                <Card>
-                  <CardItem header>
-                    <Text>Número de doadoras</Text>
-                  </CardItem>
-                  <BarChartE />
-                </Card>
-              </View>
-
-              <View>
-                <Card>
-                  <CardItem header>
-                    <Text>Número de leite coletado</Text>
-                  </CardItem>
-                  <BarChartE />
-                </Card>
-              </View>
-            </ScrollView>
-          </Tab>
-          <Tab heading="Pedidos">
-            <Helps />
-          </Tab>
-          <Tab heading="QR Code">
+          <Tab heading="Início">
             <View>
-              <Button block success
+              <Button block success style={{ margin: 20 }}
                 onPress={() => {
                   this.props.navigation.navigate("QRCodeReader");
                 }}
               >
                 <Icon type="MaterialCommunityIcons" name="qrcode-scan" />
-                <Text>Ler QR Code</Text>
+                <Text>Ler QR Code do Frasco</Text>
+              </Button>
+
+            </View>
+            <View>
+              <Button block light style={{ margin: 20 }}
+                onPress={() => {
+                  this.props.navigation.navigate("Insights");
+                }}
+              >
+                <Text>Ver Insights</Text>
+              </Button>
+
+            </View>
+
+            <View>
+              <Button block light style={{ margin: 20 }}
+                onPress={() => {
+                  this.props.navigation.navigate("Pedidos");
+                }}
+              >
+                <Text>Ver Pedidos de Doação</Text>
               </Button>
 
             </View>
           </Tab>
+
+          <Tab heading="Doadoras">
+            <Doadoras />
+          </Tab>
+
+          <Tab heading="Campanhas">
+            <View>
+              <Button block success style={{ margin: 20 }}
+                onPress={() => {
+                  this.props.navigation.navigate("QRCodeReader");
+                }}
+              >
+                <Icon type="MaterialCommunityIcons" name="qrcode-scan" />
+                <Text>Nova</Text>
+              </Button>
+
+            </View>
+
+        <ScrollView>
+          <Card>
+            <CardItem>
+              <Left>
+                <Thumbnail source={require("./heart.png")} />
+                <Body>
+                  <Text>Patrino</Text>
+                  <Text note>Equipe de Comunicação</Text>
+                </Body>
+              </Left>
+            </CardItem>
+
+            <CardItem cardBody>
+              <Image source={require("./1.jpg")} style={{height: 200, width: 200, flex: 1}}/>
+            </CardItem>
+
+            <CardItem>
+              <Left>
+                <Button transparent>
+                  <Icon active type="MaterialIcons" name="search" />
+                  <Text>Editar</Text>
+                </Button>
+              </Left>
+
+              <Right>
+                <Text>11h atrás</Text>
+              </Right>
+            </CardItem>
+          </Card>
+
+
+          <Card>
+            <CardItem>
+              <Left>
+                <Thumbnail source={require("./heart.png")} />
+                <Body>
+                  <Text>Patrino</Text>
+                  <Text note>Equipe de Comunicação</Text>
+                </Body>
+              </Left>
+            </CardItem>
+
+            <CardItem cardBody>
+              <Image source={require("./2.jpg")} style={{height: 200, width: 200, flex: 1}}/>
+            </CardItem>
+
+            <CardItem>
+              <Left>
+                <Button transparent>
+                  <Icon active type="MaterialIcons" name="search" />
+                  <Text>Editar</Text>
+                </Button>
+              </Left>
+
+              <Right>
+                <Text>11h atrás</Text>
+              </Right>
+            </CardItem>
+          </Card>
+
+
+          <Card>
+            <CardItem>
+              <Left>
+                <Thumbnail source={require("./heart.png")} />
+                <Body>
+                  <Text>Patrino</Text>
+                  <Text note>Equipe de Comunicação</Text>
+                </Body>
+              </Left>
+            </CardItem>
+
+            <CardItem cardBody>
+              <Image source={require("./3.jpg")} style={{height: 200, width: 200, flex: 1}}/>
+            </CardItem>
+
+            <CardItem>
+              <Left>
+                <Button transparent>
+                  <Icon active type="MaterialIcons" name="search" />
+                  <Text>Editar</Text>
+                </Button>
+              </Left>
+
+              <Right>
+                <Text>11h atrás</Text>
+              </Right>
+            </CardItem>
+          </Card>
+
+        </ScrollView>
+
+          </Tab>
+
         </Tabs>
 
       </Container>

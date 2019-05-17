@@ -9,6 +9,10 @@ import Login from "./app/components/Login";
 import HomeScreen from "./app/components/HomeScreen";
 import QRCodeReader from "./app/components/QRCodeReader";
 import Test from "./app/components/Test";
+import Insights from "./app/components/Insights";
+import Pedidos from "./app/components/Pedidos";
+import Bottle from "./app/components/Bottle";
+
 
 class Home extends Component<{}> {
 
@@ -49,7 +53,7 @@ class Home extends Component<{}> {
       return (
         <View style={styles.container}>
           <StatusBar barStyle="light-content" backgroundColor="white" />
-          <HomeScreen navigation={this.props.navigation} />
+          <Login navigation={this.props.navigation} />
         </View>
       );
     }
@@ -73,6 +77,24 @@ const App = createStackNavigator({
     screen: Login,
     navigationOptions: {
       title: "Login"
+    }
+  },
+  Insights: {
+    screen: Insights,
+    navigationOptions: {
+      title: "Insights"
+    }
+  },
+  Bottle: {
+    screen: Bottle,
+    navigationOptions: {
+      title: "Bottle"
+    }
+  },
+  Pedidos: {
+    screen: Pedidos,
+    navigationOptions: {
+      title: "Pedidos"
     }
   },
   QRCodeReader: {
